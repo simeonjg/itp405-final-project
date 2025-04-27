@@ -31,28 +31,30 @@
     <!-- Trending Section -->
     <div>
         <h3 class="">Trending this Week</h3>
-        <table class="table table-striped">
-        <thead>
-            <tr>
-            <th>Title</th>
-            <th>Overview</th>
-            <th>Release Date</th>
-            <th>Image</th>
-            <th></th>
-            </tr>
-        </thead>
-        <tbody>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4">
             @foreach ($response['results'] as $result)
-            <tr>
-                <td>{{ $result['title'] }}</td>
-                <td>{{ $result['overview'] }}</td>
-                <td>{{ $result['release_date'] }}</td>
-                <td><img src="https://image.tmdb.org/t/p/w200{{ $result['poster_path'] }}"></td>
-                <td><a href="{{ route('search.details', ['id' => $result['id']]) }}" class="btn btn-primary">Details</a></td>
-            </tr>
+                <div class="col">
+                    <div class="movie-card h-100 mb-4">
+                        <a href="{{ route('search.details', ['id' => $result['id']]) }}">
+                            <div class="position-relative">
+                                <!-- Poster -->
+                                <img src="https://image.tmdb.org/t/p/w500{{ $result['poster_path'] }}" 
+                                        alt="{{ $result['title'] }} poster"
+                                        class="img-fluid rounded-3 mb-2"> 
+                            </div>
+                            
+                            <!-- Title -->
+                            <h6 class="text-truncate">{{ $result['title'] }}</h6>
+                            
+                            <!-- Release Date -->
+                            <small class="text-muted">
+                                {{ date('M Y', strtotime($result['release_date'])) }}
+                            </small>
+                        </a>
+                    </div>
+                </div>
             @endforeach
-        </tbody>
-        </table>
+        </div>
     </div>
     
     

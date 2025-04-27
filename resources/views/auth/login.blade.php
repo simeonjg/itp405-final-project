@@ -11,9 +11,9 @@
 
     <!-- Email -->
     <div class="mb-3">
-      <label class="form-label" for="email">Email</label>
-      <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
-      @error('email')
+      <label class="form-label" for="username">Username</label>
+      <input type="username" id="username" name="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}">
+      @error('username')
         <div class="invalid-feedback">{{ $message }}</div>
       @enderror
     </div>
@@ -21,7 +21,7 @@
     <!-- Password -->
     <div class="mb-3">
       <label class="form-label" for="password">Password</label>
-      <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror">
+      <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}">
       @error('password')
         <div class="invalid-feedback">{{ $message }}</div>
       @enderror
