@@ -4,9 +4,12 @@
 
 @section('main')
 
-    <div class="mb-4">
-        <a href="{{ route('search.home') }}" class="btn btn-primary">Back to Home</a>
-    </div>
+    <!-- Alert section -->
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <!-- Details Section -->
     <div>
@@ -39,12 +42,20 @@
                     @endforeach
 
                     <!-- Rating -->
-                    <p class="mb-0"><strong>Rating: </strong></p><span class="badge bg-warning mb-4"><i class="bi bi-star-fill bg-"></i> {{ $response['vote_average'] }}/10</span>
+                    <p class="mb-0"><strong>Rating: </strong></p><span class="badge bg-warning mb-4"><i class="bi bi-star-fill bg-"></i> {{ $response['vote_average'] }} /10</span>
 
                     <!-- Release Date -->
                     <p class="">
                         <strong>Release Date:</strong> {{ date('F j, Y', strtotime($response['release_date'])) }}
                     </p>
+
+                    <!-- Favorites Button -->
+                    <form action="{{ route('favorites.add', ['id' => $response['id']]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-info">
+                            <i class="bi bi-heart-fill"></i> Add to Favorites
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

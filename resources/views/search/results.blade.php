@@ -31,7 +31,7 @@
             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4">
                 @foreach ($response['results'] as $result)
                     <div class="col">
-                        <div class="movie-card h-100 mb-4">
+                        <div class="h-100 mb-4">
                             <a href="{{ route('search.details', ['id' => $result['id']]) }}">
                                 <div class="position-relative">
                                     <!-- Poster -->

@@ -22,7 +22,7 @@
                 <a href="{{ route('search.home') }}" class="nav-link">Home</a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('welcome.index') }}" class="nav-link">Favorites</a>
+                <a href="{{ route('favorites.index') }}" class="nav-link">Favorites</a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('welcome.index') }}" class="nav-link">Comments</a>
