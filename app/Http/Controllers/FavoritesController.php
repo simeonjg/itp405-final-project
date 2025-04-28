@@ -41,24 +41,6 @@ class FavoritesController extends Controller
         ]);
     }
 
-    public function search(Request $request)
-    {
-
-        $term = $request->input('search-term');
-
-        // Get movies that match search term
-        $response = Http::get('https://api.themoviedb.org/3/search/movie', [
-            'api_key' => env('TMDB_API_KEY'),
-            'query' => $term,
-        ]);
-
-        return view('search.results', [
-            'user' => Auth::user(),
-            'response' => $response,
-            'term' => $term,
-            'resultCount' => $response['total_results'],
-        ]);
-    }
 
     // Add to user's favorites
     public function add($id)

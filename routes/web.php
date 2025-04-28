@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Middleware\DenyBlockedUsers;
 
 use App\Models\Artist;
@@ -45,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/favorites', [FavoritesController::class, 'index'])->name('favorites.index');
         Route::post('/favorites/add/{id}', [FavoritesController::class, 'add'])->name('favorites.add');
         Route::post('/favorites/delete/{id}', [FavoritesController::class, 'remove'])->name('favorites.remove');
+        Route::post('/comments/post/{id}', [CommentsController::class, 'comment'])->name('search.comment');
 
 
         Route::post('/tokens', [ProfileController::class, 'createToken'])->name('token.store');

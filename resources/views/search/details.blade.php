@@ -56,13 +56,33 @@
                             <i class="bi bi-heart-fill"></i> Add to Favorites
                         </button>
                     </form>
+
+                    <!-- Comment Section -->
+                    <h3 class="mt-4">Comments</h3>
+                    <form action="{{ route('search.comment', ['id' => $response['id']]) }}" method="POST" class="mt-3">
+                        @csrf
+                        <div class="form-group mb-3">
+                            <textarea 
+                                class="form-control @error('comment') is-invalid @enderror"
+                                name="comment"
+                                id="comment"
+                            >{{ old('comment') }}</textarea>
+                            @error ('comment')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">
+                            Post
+                        </button>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
     
     
-
 
     
 @endsection
