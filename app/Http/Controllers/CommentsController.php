@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Comment;
 
 class CommentsController extends Controller
 {
@@ -18,8 +19,15 @@ class CommentsController extends Controller
             'comment' => 'required|max:500',
         ]);
 
+        $comment = new Comment();
+        $comment->movie_id = $movie_id;
+        $comment->user_id = $user->id;
+        $comment->body = $request->input('comment');
+        $comment->save();
+
+
         return redirect()->back()
-            ->with('Success', 'Comment Posted!');
+            ->with('success', 'Comment Posted!');
 
     }
 }

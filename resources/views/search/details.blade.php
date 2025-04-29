@@ -58,24 +58,50 @@
                     </form>
 
                     <!-- Comment Section -->
-                    <h3 class="mt-4">Comments</h3>
-                    <form action="{{ route('search.comment', ['id' => $response['id']]) }}" method="POST" class="mt-3">
-                        @csrf
-                        <div class="form-group mb-3">
-                            <textarea 
-                                class="form-control @error('comment') is-invalid @enderror"
-                                name="comment"
-                                id="comment"
-                            >{{ old('comment') }}</textarea>
-                            @error ('comment')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+                    <h3 class="mt-5 mb-4">Comments</h3>
 
-                        <button class="btn btn-primary" type="submit">
-                            Post
-                        </button>
-                    </form>
+                    <!-- Post Comments -->
+                     <div class="mb-5">
+                        <form action="{{ route('search.comment', ['id' => $response['id']]) }}" method="POST" class="mt-3">
+                            @csrf
+                            <div class="form-group">
+                                <textarea 
+                                    class="form-control @error('comment') is-invalid @enderror"
+                                    name="comment"
+                                    id="comment"
+                                    placeholder="Write your comment here..."
+                                >{{ old('comment') }}</textarea>
+                                @error ('comment')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">
+                                Post
+                            </button>
+                        </form>
+                     </div>
+
+                    <!-- Display Comments     -->
+                     <div class="card mb-5">
+                        <div class="card-body p-0">
+                            @if ($commentCount > 0)
+                                @foreach($comments as $comment)
+                                    <div class="p-3 border-bottom">
+                                        <h5 class=""><i class="bi bi-person-circle"></i>   {{ $comment->user->username }}</h5>
+                                        <p>{{ $comment->body }}</p>
+                                        <small class="text-muted">{{ date_format($comment->created_at, 'n/j/Y') }} at {{ date_format($comment->created_at, 'g:i A') }} </small>
+                                    </div>
+                                    
+                                @endforeach
+                            @else
+                                <h6 class="p-2">No comments yet. Be the first to leave your thoughts!</h6>
+                            @endif
+                        </div>
+                        
+                     </div>
+                    
+                    
 
                 </div>
             </div>

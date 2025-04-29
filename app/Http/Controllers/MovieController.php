@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Http;
 
 class MovieController extends Controller
@@ -48,9 +49,18 @@ class MovieController extends Controller
             'api_key' => env('TMDB_API_KEY'),
         ]);
 
+        // Get comments for movie
+        $user = Auth::user();
+        $comments = Comment::with('user')
+            ->where('movie_id', $id)
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+
         return view('search.details', [
             'user' => Auth::user(),
             'response' => $response,
+            'comments' => $comments,
+            'commentCount' => count($comments),
         ]);
     }
 
