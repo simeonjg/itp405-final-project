@@ -47,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/favorites/add/{id}', [FavoritesController::class, 'add'])->name('favorites.add');
         Route::post('/favorites/delete/{id}', [FavoritesController::class, 'remove'])->name('favorites.remove');
         Route::post('/comments/post/{id}', [CommentsController::class, 'comment'])->name('search.comment');
+        Route::post('/comments/delete/{id}', [CommentsController::class, 'remove'])->name('comments.remove');
+        Route::get('comments/edit/{id}', [CommentsController::class, 'edit'])->name('comments.edit');
+        Route::post('/comments/update/{id}', [CommentsController::class, 'update'])->name('comments.update');
 
 
         Route::post('/tokens', [ProfileController::class, 'createToken'])->name('token.store');

@@ -25,9 +25,6 @@
                 <a href="{{ route('favorites.index') }}" class="nav-link">Favorites</a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('welcome.index') }}" class="nav-link">Comments</a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ route('profile.index') }}" class="nav-link">Profile</a>
               </li>
               <li class="nav-item">

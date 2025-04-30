@@ -58,29 +58,7 @@
                     </form>
 
                     <!-- Comment Section -->
-                    <h3 class="mt-5 mb-4">Comments</h3>
-
-                    <!-- Post Comments -->
-                     <div class="mb-5">
-                        <form action="{{ route('search.comment', ['id' => $response['id']]) }}" method="POST" class="mt-3">
-                            @csrf
-                            <div class="form-group">
-                                <textarea 
-                                    class="form-control @error('comment') is-invalid @enderror"
-                                    name="comment"
-                                    id="comment"
-                                    placeholder="Write your comment here..."
-                                >{{ old('comment') }}</textarea>
-                                @error ('comment')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <button class="btn btn-primary" type="submit">
-                                Post
-                            </button>
-                        </form>
-                     </div>
+                    <h3 class="mt-5 mb-4">Edit Comment Below:</h3>
 
                     <!-- Display Comments     -->
                      <div class="card mb-5">
@@ -88,33 +66,33 @@
                             @if ($commentCount > 0)
                                 @foreach($comments as $comment)
                                     <div class="p-3 border-bottom">
-                                        <!-- Allow user to edit/delete their own comments -->
+                                        <!-- Allow user to edit chosen comment -->
                                         @if ($comment->user_id == $user->id)
-                                            <h5 class="text-info"><i class="bi bi-person-circle"></i>   {{ $comment->user->username }}</h5>
-                                            <p>{{ $comment->body }}</p>
-                                            <small class="text-muted">{{ date_format($comment->updated_at, 'n/j/Y') }} at {{ date_format($comment->updated_at, 'g:i A') }} </small>
-                                            <div class="d-flex">
-                                                <!-- Edit Comment -->
-                                                <form action="{{ route('comments.edit', ['id' => $comment['id']]) }}" method="GET" class="mr-3">
+                                        
+                                            @if ($comment->id == $updating->id)
+                                                <h5 class="text-info"><i class="bi bi-person-circle"></i>   {{ $comment->user->username }}</h5>
+                                                <form action="{{ route('comments.update', ['id' => $comment['id']]) }}" method="POST">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-link p-0 border-0">
-                                                        <small class="text-primary">
-                                                            <i class="bi bi-pen-fill"></i> 
-                                                            Edit
-                                                        </small>
-                                                    </button>
-                                                </form> 
-                                                <!-- Delete Comment -->
-                                                <form action="{{ route('comments.remove', ['id' => $comment['id']]) }}" method="POST">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-link p-0 border-0">
-                                                        <small class="text-danger">
-                                                            <i class="bi bi-trash-fill"></i> 
-                                                            Remove
-                                                        </small>
-                                                    </button>
-                                                </form>  
-                                            </div>
+                                                    <div class="form-group">
+                                                        <textarea
+                                                            class="form-control @error('body') is-invalid @enderror"
+                                                            name="comment"
+                                                            id="comment"
+                                                            
+                                                        >{{ old('comment', $comment->body) }}</textarea>
+                                                        @error ('comment')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                </form>
+                                                
+                                            @else
+                                                <h5 class="text-info"><i class="bi bi-person-circle"></i>   {{ $comment->user->username }}</h5>
+                                                <p>{{ $comment->body }}</p>
+                                                <small class="text-muted">{{ date_format($comment->updated_at, 'n/j/Y') }} at {{ date_format($comment->updated_at, 'g:i A') }} </small>
+                                            @endif
+                                                
                                             
                                         @else
                                             <h5 class=""><i class="bi bi-person-circle"></i>   {{ $comment->user->username }}</h5>
