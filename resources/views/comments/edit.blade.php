@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Details - ' . $response['title'])
+@section('title', 'Edit Comment - ' . $response['title'])
 
 @section('main')
 

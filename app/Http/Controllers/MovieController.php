@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 
 class MovieController extends Controller
 {
+    // Display trending movies on home page
     public function index()
     {
         // Get trending movies this week
@@ -23,6 +24,7 @@ class MovieController extends Controller
         ]);
     }
 
+    // Display search results
     public function search(Request $request)
     {
 
@@ -42,6 +44,7 @@ class MovieController extends Controller
         ]);
     }
 
+    // Show movie details
     public function show($id)
     {
         // Get movie by its id

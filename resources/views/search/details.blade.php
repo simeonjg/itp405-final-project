@@ -52,7 +52,7 @@
                     <!-- Favorites Button -->
                     <form action="{{ route('favorites.add', ['id' => $response['id']]) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-info">
+                        <button type="submit" class="btn btn-light text-danger">
                             <i class="bi bi-heart-fill"></i> Add to Favorites
                         </button>
                     </form>

@@ -55,7 +55,7 @@
     <!-- Subscription -->
     <div class="my-3 form-check">
         <input type="checkbox" name="is-subscribed" id="is-subscribed" class="form-check-input" value=1 {{ old('is-subscribed') ? 'checked' : '' }}>
-        <label for="is-subscribed" class="form-check-label">Subscribed to Newsletter</label>
+        <label for="is-subscribed" class="form-check-label">Subscribe to Newsletter</label>
     </div>
 
     <button type="submit" class="btn btn-primary">

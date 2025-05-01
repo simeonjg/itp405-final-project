@@ -10,7 +10,7 @@ class AuthController extends Controller
     // Log user out
     public function logout()
     {
-        Auth::logout(); //session_destroy()
+        Auth::logout(); 
 
         return redirect()->route('auth.login');
     }
@@ -25,18 +25,13 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
-        // $loginWasSuccessful = Auth::attempt([
-        //     'email' => $request->input('email'),
-        //     'password' => $request->input('password'),
-        // ]);
-
-        // validation for input fields
+        // Or alidation for input fields
         $validated = $request->validate([
             'username' => 'required',
             'password' => 'required',
         ]);
 
-        // authentication of credentials
+        // Authentication of credentials
         if (Auth::attempt($validated)) {
             return redirect()->route('search.home');
         } else {
@@ -44,13 +39,5 @@ class AuthController extends Controller
                 ->withInput()
                 ->with('error', 'Invalid Credentials');
         }
-
-        
-
-        // if($loginWasSuccessful) {
-        //     return redirect()->route('profile.index');
-        // } else {
-        //     return redirect()->route('auth.login')->with('error', 'Invalid credentials');
-        // }
     }
 }

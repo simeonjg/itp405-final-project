@@ -18,7 +18,7 @@ class RegistrationController extends Controller
     // Validate input and register user
     public function register(Request $request)
     {
-        // input field validation
+        // Input field validation
         $request->validate([
             'first-name' => 'required|max:50',
             'last-name' => 'required|max:50',
@@ -27,7 +27,7 @@ class RegistrationController extends Controller
             'password' => 'required'
         ]);
 
-
+        // Create and save new user
         $user = new User();
         $user->first_name = $request->input('first-name');
         $user->last_name = $request->input('last-name');
@@ -37,6 +37,7 @@ class RegistrationController extends Controller
         $user->is_subscribed = $request->input('is-subscribed', false);
         $user->save();
 
+        // Log user in
         Auth::login($user);
 
         return redirect()

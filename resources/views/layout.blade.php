@@ -9,14 +9,8 @@
 </head>
 <body>
     <div class="container">
-      <!-- Error section -->
-        @if (session('error'))
-            <div class="alert alert-danger mt-3" role="alert">
-                {{ session('error') }}
-            </div>
-        @endif
       <!-- Navigation section -->
-        <ul class="nav d-flex justify-content-end">
+        <ul class="navbar navbar-expand-md bg-light justify-content-end list-inline">
             @if (Auth::check())
               <li class="nav-item">
                 <a href="{{ route('search.home') }}" class="nav-link">Home</a>
@@ -42,6 +36,13 @@
               </li>
             @endif
         </ul>
+
+        <!-- Error section -->
+        @if (session('error'))
+            <div class="alert alert-danger mt-3" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
 
         @yield('main')
         
